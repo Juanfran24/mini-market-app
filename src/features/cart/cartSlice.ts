@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Cart, ItemProduct } from '../../models/cart';
 import { Product } from '../../models/product';
 
-const initialState : Cart = {
+export const initialState : Cart = {
   items: [],
   totalCost: 0
 }
@@ -19,8 +19,8 @@ export const cartSlice = createSlice({
         state.totalCost += product.price;
         return;
       }
-      state.items.push({ product, quantity: 0 });
-      
+      state.items.push({ product, quantity: 1 });
+      state.totalCost += product.price;
     },
     diffToCart: (state, action: PayloadAction<{ product: Product }>) => {
       const { product } = action.payload;
