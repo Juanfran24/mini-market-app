@@ -1,34 +1,29 @@
 import { View, Text } from "react-native";
 import React from "react";
 import { styles } from "./styles";
-import products from "../../mocks/products";
 import ShoppingCardItem from "../ShoppingCartItem";
 import { useSelector } from "react-redux";
+import type { RootState } from "../../app/store";
 
 export default function ShoppingCart() {
 
-  let arrayProducts = [products[0], products[1]];
-  
-  // const arrayProducts = useSelector((state : ) => state.cart);
-
-  let isEmpty = arrayProducts.length === 0;
-
+  const cart = useSelector((state: RootState) => state.cart);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Shopping Cart</Text>
       <View style={styles.productsContainer}>
-        {isEmpty ? (
+        {cart.items.length === 0 ? (
           <Text style={{ color: "#818181" }}>Your shopping cart is empty</Text>
         ) : (
-          arrayProducts.map((product) => (
-            <ShoppingCardItem product={product}/>
+          cart.items.map((item) => (
+            <ShoppingCardItem key={item.product.id} product={item.product}/>
           ))
         )}
       </View>
       <View style={styles.priceContainer}>
         <Text style={styles.titlePrice}>Total:</Text>
-        <Text style={styles.price}> $0</Text>
+        <Text style={styles.price}> ${cart.totalCost}</Text>
       </View>
       {/* <ButtonWm/> */}
     </View>

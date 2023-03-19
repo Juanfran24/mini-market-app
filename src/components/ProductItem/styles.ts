@@ -32,5 +32,21 @@ export const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     transition: "all 0.2s ease-in-out",
-  }
+  },
+  circleQuantity: {
+    width: 40,
+    height: 40,
+    borderRadius: "50%",
+    backgroundColor: '#911cb4',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    top: 10,
+    left: 10,
+  },
+  quantity: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });

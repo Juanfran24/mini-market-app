@@ -1,11 +1,10 @@
-import { View, Text, Image, Button, TouchableHighlight } from 'react-native'
-import React, { useState, useEffect, useContext } from 'react'
+import { View, Text, Image, TouchableHighlight } from 'react-native'
+import React from 'react'
 import { styles } from './styles'
-import { Product } from '../../models/product';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, diffToCart } from '../../features/cart/cartSlice';
-import { useSelector } from "react-redux";
-import { RootState } from '../../app/store';
+import type { Product } from '../../models/product';
+import type { RootState } from '../../app/store';
 
 interface ProductSelectProps {
   product: Product;
@@ -25,9 +24,6 @@ export default function ProductSelect({ product }: ProductSelectProps) {
     dispatch(diffToCart({ product }))
   }
 
-  const quantity = cart.items.find(item => item.product.id === product.id)?.quantity || 0;
-
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Product</Text>
@@ -46,9 +42,16 @@ export default function ProductSelect({ product }: ProductSelectProps) {
           <Text style={styles.priceProduct}>${product?.price}</Text>
         </View>
         <View style={styles.buttonsContainer}>
-          <TouchableHighlight style={styles.buttonSubtract} onPress={handleDiffFromCart} disabled={cart.items.find(item => item.product.id === product.id)?.quantity < 1}>
-            <Text style={styles.buttonSubtractText}>-</Text>
-          </TouchableHighlight>
+          {!(cart.items.find(item => item.product.id === product.id)) ? 
+            <TouchableHighlight style={styles.buttonSubtract} onPress={handleDiffFromCart} disabled>
+              <Text style={styles.buttonSubtractText}>-</Text>
+            </TouchableHighlight>
+            :
+            <TouchableHighlight style={styles.buttonSubtract} onPress={handleDiffFromCart}>
+              <Text style={styles.buttonSubtractText}>-</Text>
+            </TouchableHighlight>
+            
+          }
           <TouchableHighlight style={styles.buttonAdd} onPress={handleAddToCart}>
             <Text style={styles.buttonAddText}>+</Text>
           </TouchableHighlight>

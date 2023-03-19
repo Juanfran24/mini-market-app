@@ -3,13 +3,12 @@ import React, { useState, useEffect } from 'react'
 import { stylesMobile } from './stylesMobile'
 import { stylesDesktop } from './stylesDesktop'
 import IconBxsShoppingBags from '../../icons/bagsIcon';
-import IconShoppingCart from '../../icons/shoppingCartIcon';
 import products from '../../mocks/products';
 import ProductItem from '../../components/ProductItem';
 import ProductSelect from '../../components/ProductSelected';
-import { Product } from '../../models/product';
 import ButtonShoppingCart from '../../components/ButtonShoppingCart';
 import ShoppingCart from '../../components/ShoppingCart';
+import type { Product } from '../../models/product';
 
 export default function Home() {
 
@@ -28,7 +27,7 @@ export default function Home() {
   };
   const [product, setProduct] = useState<Product>(newProduct);
   const [selectedItemId, setSelectedItemId] = useState(0);
-  const [isOpenShoppingCard, setIsOpenShoppingCard] = useState(true);
+  const [isOpenShoppingCard, setIsOpenShoppingCard] = useState(false);
 
   const handleItemClick = (product: Product) => {
     if(selectedItemId === product.id) {
@@ -43,15 +42,13 @@ export default function Home() {
   useEffect(() => {
     if(isOpenShoppingCard) {
       if(selectedItemId !== 0) {
-        setSelectedItemId(0);
-        setProduct(newProduct);
+        setIsOpenShoppingCard(false);
       }
       setSelectedItemId(0);
       setProduct(newProduct);
     }
   
-  }, [isOpenShoppingCard, selectedItemId])
-  
+  }, [selectedItemId])
 
   return (
     <View style={styles.mainContainer}>

@@ -2,6 +2,8 @@ import { View, Text, TouchableWithoutFeedback } from 'react-native'
 import React from 'react'
 import IconShoppingCart from '../../icons/shoppingCartIcon'
 import { styles } from './styles'
+import { useSelector } from 'react-redux';
+import { RootState } from '../../app/store';
 
 interface ButtonShoppingCardProps {
   isOpen: boolean;
@@ -9,12 +11,15 @@ interface ButtonShoppingCardProps {
 }
 
 export default function ButtonShoppingCart({ isOpen, onPress }: ButtonShoppingCardProps) {
+
+  const cart = useSelector((state: RootState) => state.cart);
+
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.container}>
         <View style={isOpen ? styles.isPressed : styles.content}>
           <IconShoppingCart styles={isOpen ? styles.cartIconPressed : styles.cartIcon}/>
-          <Text style={isOpen ? styles.priceCartPressed : styles.priceCart}>$0</Text>
+          <Text style={isOpen ? styles.priceCartPressed : styles.priceCart}>${cart.totalCost}</Text>
         </View>
         <View style={isOpen ? styles.closeContainer : styles.notPressed}>
           <Text style={styles.closeText}>x</Text>
