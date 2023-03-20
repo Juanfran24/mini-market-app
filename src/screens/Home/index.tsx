@@ -67,16 +67,27 @@ export default function Home() {
             <ProductItem key={product.id} product={product} isPressed={selectedItemId === product.id} onPress={() => handleItemClick(product)} />
           ))}
         </View>
-        <View style={styles.bodyRight}>
-          {!isOpenShoppingCard ?
-            (selectedItemId === 0 ? 
-              <Text style={{ color: "inherit" }}>Please choose a product on the left.</Text>
+        {width < 768 && selectedItemId !== 0 ?
+          <View style={styles.productSelectedSection}>
+            <ProductSelect product={product} onClose={() => handleItemClick(product)}/>
+          </View>
+          :
+          width < 768 && isOpenShoppingCard ?
+            <View style={styles.shopCartSection}>
+              <ShoppingCart onClose={() => setIsOpenShoppingCard(false)}/>
+            </View>
+          :
+          <View style={styles.bodyRight}>
+            {!isOpenShoppingCard ?
+              (selectedItemId === 0 ? 
+                <Text style={{ color: "inherit" }}>Please choose a product on the left.</Text>
+                :
+                <ProductSelect product={product}/>)
               :
-              <ProductSelect product={product}/>)
-            :
-            <ShoppingCart/>
-          }
-        </View>
+              <ShoppingCart/>
+            }
+          </View>
+        }
       </View>
     </View>
   )

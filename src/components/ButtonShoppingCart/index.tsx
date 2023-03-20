@@ -1,9 +1,10 @@
-import { View, Text, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, TouchableWithoutFeedback, useWindowDimensions } from 'react-native'
 import React from 'react'
 import IconShoppingCart from '../../icons/shoppingCartIcon'
-import { styles } from './styles'
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
+import { stylesMobile } from './stylesMobile'
+import { stylesDesktop } from './stylesDesktop'
 
 interface ButtonShoppingCardProps {
   isOpen: boolean;
@@ -12,6 +13,8 @@ interface ButtonShoppingCardProps {
 
 export default function ButtonShoppingCart({ isOpen, onPress }: ButtonShoppingCardProps) {
 
+  const { width } = useWindowDimensions();
+  const styles = width < 768 ? stylesMobile : stylesDesktop;
   const cart = useSelector((state: RootState) => state.cart);
 
   return (

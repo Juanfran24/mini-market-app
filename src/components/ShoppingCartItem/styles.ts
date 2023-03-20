@@ -6,9 +6,9 @@ export const styles = StyleSheet.create({
     borderBottomColor: '#911cb44d',
     borderBottomWidth: 1,
     alignItems: 'center',
-    paddingBottom: "0.5rem",
+    paddingVertical: "0.5rem",
     paddingLeft: "0.5rem",
-    gap: "1rem",
+    gap: "2rem",
   },
   image: {
     width: 80,
@@ -21,8 +21,8 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   circleQuantity: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     borderRadius: "50%",
     backgroundColor: '#911cb4',
     alignItems: 'center',

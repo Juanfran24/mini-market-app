@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import normalize from "react-native-normalize";
 
-export const styles = StyleSheet.create({
+export const stylesDesktop = StyleSheet.create({
   container: {
     borderBottomColor: "#911cb44d",
     borderBottomWidth: 1,

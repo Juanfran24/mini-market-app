@@ -1,19 +1,22 @@
-import { View, Text, Image, TouchableHighlight } from 'react-native'
+import { View, Text, Image, TouchableHighlight, useWindowDimensions } from 'react-native'
 import React from 'react'
-import { styles } from './styles'
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, diffToCart } from '../../features/cart/cartSlice';
 import type { Product } from '../../models/product';
 import type { RootState } from '../../app/store';
+import { stylesDesktop } from './stylesDesktop';
+import { stylesMobile } from './stylesMobiles';
 
 interface ProductSelectProps {
   product: Product;
+  onClose?: () => void;
 }
 
-export default function ProductSelect({ product }: ProductSelectProps) {
+export default function ProductSelect({ product, onClose }: ProductSelectProps) {
 
+  const { width } = useWindowDimensions();
+  const styles = width < 768 ? stylesMobile : stylesDesktop;
   const dispatch = useDispatch();
-
   const cart = useSelector((state: RootState) => state.cart);
  
   const handleAddToCart = () => {
@@ -26,7 +29,7 @@ export default function ProductSelect({ product }: ProductSelectProps) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Product</Text>
+      {width > 768 && <Text style={styles.title}>Product</Text>}
       <View style={styles.imageAndQuantityContainer}>
         <Image source={{ uri: product?.image.url }} style={styles.image}/>
         {cart.items.find(item => item.product.id === product.id) && 
@@ -35,6 +38,13 @@ export default function ProductSelect({ product }: ProductSelectProps) {
           </View>
         }
       </View>
+      {width < 768 && 
+        <TouchableHighlight onPress={onClose}>
+          <View style={styles.closeButton}>
+            <Text style={styles.closeButtonText}>X</Text>
+          </View>
+        </TouchableHighlight>
+      }
       <View style={styles.nameAndPriceSection}>
         <View style={styles.nameAndPriceContainer}>
           <Text style={styles.nameProduct}>{product?.name}</Text>
@@ -60,6 +70,7 @@ export default function ProductSelect({ product }: ProductSelectProps) {
       <View style={styles.descriptionSection}>
         <Text style={styles.descriptionProduct}>{product?.description}</Text>
       </View>
+      
     </View>
   )
 }

@@ -1,25 +1,28 @@
 import { StyleSheet } from "react-native";
+import normalize from "react-native-normalize";
 
-export const styles = StyleSheet.create({
+export const stylesMobile = StyleSheet.create({
   container: {
     borderWidth: 1,
-    width: "max-content",
+    width: normalize(150),
     height: "max-content",
     borderColor: "#c1c1c1",
-    padding: "1rem",
+    padding: normalize(10),
     cursor: "pointer",
     transition: "all 0.2s ease-in-out",
+    borderRadius: normalize(4),
   },
   image: {
-    width: 150,
+    width: 100,
     resizeMode: "contain",
+    alignSelf: "center",
     // cover
   },
   pressed: {
     cursor: "pointer",
-    width: "max-content",
+    width: normalize(150),
     height: "max-content",
-    padding: "1rem",	
+    padding: normalize(10),
     borderWidth: 1,
     borderColor: "#7e199c",
     //shadow
@@ -32,10 +35,11 @@ export const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     transition: "all 0.2s ease-in-out",
+    borderRadius: normalize(4),
   },
   circleQuantity: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
     borderRadius: "50%",
     backgroundColor: '#911cb4',
     alignItems: 'center',
@@ -49,4 +53,16 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  descriptionContainer: {
+    borderTopColor: "#911cb44d",
+    borderTopWidth: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingTop: normalize(10),
+  },
+  priceText: {
+    color: "#7e199c",
+    fontSize: normalize(16),
+    fontWeight: "bold",
+  }
 });
