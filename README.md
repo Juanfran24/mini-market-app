@@ -35,11 +35,8 @@ npm run android
 ```
 
 
-## Compile the project
+## Compile the project for web
 
 ```bash
-npm run build
+npx expo export:web
 ```
-
-
-
